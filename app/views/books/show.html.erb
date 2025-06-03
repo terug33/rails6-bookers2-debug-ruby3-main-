@@ -37,6 +37,20 @@
             </td>
           <% end %>
 
+          <td>
+            <p>コメント件数：<%= @book.post_comments.count %></p>
+          </td>
+        </tr>
+
+        <tr>
+          
+            <%= @book.post_comments.each do |post_comment| %>
+              <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+              
+
+
+
+
 
         </tr>
       </table>
