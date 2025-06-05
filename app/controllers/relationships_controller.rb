@@ -1,4 +1,5 @@
 class RelationshipsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user
 
   def create
@@ -10,6 +11,14 @@ class RelationshipsController < ApplicationController
     current_user.unfollow(@user)
     redirect_to request.referer 
   end 
+
+  def followings
+    @users = @user.followings
+  end
+
+  def followers 
+    @users = @user.followers 
+  end
 
   
   private
