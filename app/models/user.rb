@@ -27,11 +27,11 @@ class User < ApplicationRecord
   end
 
   def follow(other_user)
-    relationships.create(followed_id: other_user.id)
+    active_relationships.create(followed_id: other_user.id)
   end 
 
   def unfollow(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy
+    passive_relationships.find_by(followed_id: other_user.id).destroy
   end 
 
   def following?(other_user)
