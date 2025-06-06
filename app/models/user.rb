@@ -26,6 +26,7 @@ class User < ApplicationRecord
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 
+  #フォロー機能
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end 
@@ -36,6 +37,22 @@ class User < ApplicationRecord
 
   def following?(other_user)
     followings.include?(other_user)
+  end 
+
+  #検索機能exact_match, starts_with, ends_with, contains
+  def self.search(keyword, search_type)
+    case search_type
+    when 'exact_match'
+      where(name: keyword)
+    when 'starts_with'
+      where("name LIKE ?", "#{keyword}%")
+    when 'ends_with'
+      where("name LIKE ?", "%#{keyword}")
+    when 'contains'
+      where("name LIKE ?", "%#{keyword}%")
+    else
+      all 
+    end 
   end 
 
 end
