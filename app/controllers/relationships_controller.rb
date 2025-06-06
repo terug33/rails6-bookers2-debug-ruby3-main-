@@ -12,6 +12,8 @@ class RelationshipsController < ApplicationController
     redirect_to request.referer 
   end 
 
+  #def followingsはアクション名→ルーティングの#followingsと名前を揃える
+  #.followingsはメソッド→モデルの「has_many :followings, through: :active_relationships, source: :followed」と名前を揃える
   def followings
     @users = @user.followings
   end
