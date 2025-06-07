@@ -39,20 +39,17 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end 
 
-  #検索機能exact_match, starts_with, ends_with, contains
-  def self.search(keyword, search_type)
-    case search_type
-    when 'exact_match'
-      where(name: keyword)
-    when 'starts_with'
-      where("name LIKE ?", "#{keyword}%")
-    when 'ends_with'
-      where("name LIKE ?", "%#{keyword}")
-    when 'contains'
-      where("name LIKE ?", "%#{keyword}%")
-    else
-      all 
-    end 
+  #検索機能
+  def self.search_for(content, method)
+    if method == 'perfect_match'
+      User.where('name LIKE ?', content)
+    elsif method == 'starts_with'
+      User.where('name LIKE ?', content + '%')
+    elsif method == 'ends_with'
+      User.where('name LIKE ?', '%' + content)
+    else 
+      User.where('name LIKE ?', '%' + content + '%')
+    end
   end 
-
+ 
 end

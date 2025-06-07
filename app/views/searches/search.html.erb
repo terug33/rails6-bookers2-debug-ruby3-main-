@@ -1,0 +1,9 @@
+<% if @model == 'user' %>
+  <h3>Users search_for "<%= @content %>"</h3>
+   <p>検索件数: <%= @records.count %>件</p>
+  <%= render 'users/index', users: @records %>
+<% else %>
+  <h3>Books search_for "<%= @content %>"</h3>
+  <p>検索件数: <%= @records.count %>件</p>
+  <%= render 'books/index', books: @records %>
+<% end %>
